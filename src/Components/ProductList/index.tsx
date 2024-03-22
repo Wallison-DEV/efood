@@ -5,23 +5,22 @@ import Game from '../../models/Game'
 
 export type ProductListProps = {
     title: string
-    background: 'gray' | 'black'
     games: Game[]
+    page: 'home' | 'perfil'
 }
-const ProductList = ({ background, title, games }: ProductListProps) => (
-    <Container background={background}>
+const ProductList = ({ title, games, page = 'home' }: ProductListProps) => (
+    <Container page={page}>
         <div className="container">
             <Title>{title}</Title>
-            <List>
+            <List page={page}>
                 {games.map((game) => (
                     <Product
                         key={game.id}
                         title={game.title}
-                        category={game.category}
-                        system={game.system}
                         description={game.description}
                         infos={game.infos}
                         image={game.image}
+                        rating={game.rating}
                     />
                 ))}
             </List>

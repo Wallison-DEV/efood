@@ -1,22 +1,23 @@
 import Tag from '../Tag'
-import { Card, Descricao, Infos, Titulo } from './styles'
+import { Card, Descricao, Infos, Titulo, Ratting } from './styles'
+
+import starImg from '../../assets/icons/estrela.png'
+import Button from '../Button'
 
 type ProductProps = {
     title: string
-    category: string
-    system: string
     description: string
     infos: string[]
     image: string
+    rating: number
 }
 
 const Product = ({
     title,
-    category,
-    system,
     description,
     infos,
     image,
+    rating,
 }: ProductProps) => (
     <Card>
         <img src={image} alt={title} />
@@ -25,10 +26,20 @@ const Product = ({
                 <Tag key={info}>{info}</Tag>
             ))}
         </Infos>
-        <Titulo>{title}</Titulo>
-        <Tag>{category}</Tag>
-        <Tag>{system}</Tag>
+        <div>
+            <Titulo>{title}</Titulo>
+            <Ratting>
+                {rating.toString()}{' '}
+                <img src={starImg} alt="Estrela de classificação" />
+            </Ratting>
+        </div>
         <Descricao>{description}</Descricao>
+        <Button
+            type="dark"
+            title="Saiba mais"
+            children="Saiba mais"
+            to="/categorias"
+        ></Button>
     </Card>
 )
 

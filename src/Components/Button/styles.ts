@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom'
 
 import { Cores } from '../../styles'
 
-export const ButtonContainer = styled.button`
-    border: 2px solid ${Cores.branca};
-    color: ${Cores.branca};
-    background-color: transparent;
+export const ButtonLight = styled.button`
+    color: ${Cores.salmao};
+    background-color: ${Cores.bege};
     font-size: 16px;
     font-weight: bold;
     padding: 8px 16px;
@@ -14,12 +13,13 @@ export const ButtonContainer = styled.button`
 `
 
 export const ButtonLink = styled(Link)`
-    border: 2px solid ${Cores.branca};
-    color: ${Cores.branca};
-    background-color: transparent;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 8px 16px;
+    color: ${Cores.bege};
+    background-color: ${Cores.salmao};
     text-decoration: none;
-    border-radius: 8px;
+    padding: 4px 6px;
+    font-size: 14px;
+    font-weight: 700;
+    height: 24px;
+    width: 88px;
+    text-align: center;
 `
