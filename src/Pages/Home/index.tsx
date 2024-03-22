@@ -45,6 +45,6 @@ const Promoções: Game[] = [
 export const Home = () => (
     <>
         <Banner />
-        <ProductList title="Promoções" games={Promoções} />
+        <ProductList page='home' title="Promoções" games={Promoções} />
     </>
 )
