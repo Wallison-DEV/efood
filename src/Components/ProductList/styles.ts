@@ -5,7 +5,7 @@ import { Cores } from '../../styles'
 import { Card } from '../Product/styles'
 
 export const Container = styled.section<
-    Omit<ProductListProps, 'title' | 'games'>
+    Omit<ProductListProps, 'title' | 'produto'>
 >`
     padding: 26px 0 80px;
 
@@ -15,7 +15,7 @@ export const Container = styled.section<
         border: 1px solid ${Cores.salmao};
     }
 `
-export const List = styled.ul<Omit<ProductListProps, 'title' | 'games'>>`
+export const List = styled.ul<Omit<ProductListProps, 'title' | 'produto'>>`
     display: grid;
     grid-template-columns: ${(props) =>
         props.page === 'home' ? '1fr 1fr' : '1fr 1fr 1fr'};

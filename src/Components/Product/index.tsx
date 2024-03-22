@@ -10,6 +10,7 @@ type ProductProps = {
     infos: string[]
     image: string
     rating: number
+    id: number
 }
 
 const Product = ({
@@ -18,18 +19,21 @@ const Product = ({
     infos,
     image,
     rating,
+    id,
 }: ProductProps) => (
     <Card>
         <img src={image} alt={title} />
-        <Infos>
-            {infos.map((info) => (
-                <Tag key={info}>{info}</Tag>
-            ))}
-        </Infos>
+        {infos && infos.length > 0 && (
+            <Infos>
+                {infos.map((info) => (
+                    <Tag key={info}>{info}</Tag>
+                ))}
+            </Infos>
+        )}
         <div>
             <Titulo>{title}</Titulo>
             <Ratting>
-                {rating.toString()}{' '}
+                {rating && rating.toString()}{' '}
                 <img src={starImg} alt="Estrela de classificação" />
             </Ratting>
         </div>
@@ -38,7 +42,7 @@ const Product = ({
             type="dark"
             title="Saiba mais"
             children="Saiba mais"
-            to="/categorias"
+            to={`/perfil/${id}`}
         ></Button>
     </Card>
 )
