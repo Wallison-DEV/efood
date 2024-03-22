@@ -1,48 +1,38 @@
-import { Container, FooterSection, Link, Links, SectionTitle } from './styles'
+import { Container, FooterSection, Link, Links } from './styles'
+
+import logo from '../../assets/images/logo.png'
+
+import facebook from '../../assets/icons/facebook.png'
+import twitter from '../../assets/icons/twitter.png'
+import instagram from '../../assets/icons/instagram.png'
 
 const Footer = () => (
     <Container>
         <div className="container">
             <FooterSection>
-                <SectionTitle>Categorias</SectionTitle>
+                <img src={logo} alt="E-FOOD logo" />
                 <Links>
                     <li>
-                        <Link>RPG</Link>
+                        <Link>
+                            <img src={facebook} alt="Visite nosso Facebook" />
+                        </Link>
                     </li>
                     <li>
-                        <Link>Aventura</Link>
+                        <Link>
+                            <img src={twitter} alt="Visite nosso Twitter" />
+                        </Link>
                     </li>
                     <li>
-                        <Link>Simulação</Link>
-                    </li>
-                    <li>
-                        <Link>Esportes</Link>
-                    </li>
-                    <li>
-                        <Link>Estratégia</Link>
-                    </li>
-                    <li>
-                        <Link>FPS</Link>
-                    </li>
-                </Links>
-            </FooterSection>
-            <FooterSection>
-                <SectionTitle>Acesso rápido</SectionTitle>
-                <Links>
-                    <li>
-                        <Link>Novidades</Link>
-                    </li>
-                    <li>
-                        <Link>Promoções</Link>
-                    </li>
-                    <li>
-                        <Link>Em Breve</Link>
+                        <Link>
+                            <img src={instagram} alt="Visite nosso Instagram" />
+                        </Link>
                     </li>
                 </Links>
             </FooterSection>
             <p>
-                {new Date().getFullYear()} - &copy; E-PLAY Todos os direitos
-                reservados
+                A efood é uma plataforma para divulgação de estabelecimentos, a
+                responsabilidade pela entrega, qualidade dos produtos é toda do
+                estabelecimento contratado.
             </p>
         </div>
     </Container>

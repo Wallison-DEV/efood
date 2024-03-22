@@ -7,19 +7,19 @@ import { Card } from '../Product/styles'
 export const Container = styled.section<
     Omit<ProductListProps, 'title' | 'games'>
 >`
-    padding: 32px 0;
-    background-color: ${(props) =>
-        props.background == 'black' ? Cores.preto : Cores.cinza};
+    padding: 26px 0 80px;
 
     ${Card} {
-        background-color: ${(props) =>
-            props.background == 'black' ? Cores.cinza : Cores.preto};
+        width: ${(props) => (props.page === 'home' ? '472px' : '320px')};
+        background-color: ${Cores.branco};
+        border: 1px solid ${Cores.salmao};
     }
 `
-export const List = styled.ul`
+export const List = styled.ul<Omit<ProductListProps, 'title' | 'games'>>`
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    column-gap: 24px;
+    grid-template-columns: ${(props) =>
+        props.page === 'home' ? '1fr 1fr' : '1fr 1fr 1fr'};
+    gap: 24px;
     margin-top: 40px;
 `
 export const Title = styled.h2`

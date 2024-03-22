@@ -1,11 +1,10 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const Cores = {
-    branca: '#EEE',
-    preto: '#111',
-    cinza: '#333',
-    verde: '#10AC84',
-    cinzaClaro: '#a3a3a3',
+    salmao: '#E66767',
+    bege: '#FFF8F2',
+    branco: '#FFFFFF',
+    rosa: '#FFEBD9',
 }
 
 export const EstiloGlobal = createGlobalStyle`
@@ -17,9 +16,8 @@ export const EstiloGlobal = createGlobalStyle`
     list-style: none;
   }
   body {
-    background-color: ${Cores.preto};
-    color: ${Cores.branca};
-    padding-top: 40px;
+    background-color: ${Cores.bege};
+    color: ${Cores.salmao};
   }
   .container { 
     max-width: 1024px;
