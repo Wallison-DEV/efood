@@ -36,7 +36,7 @@ export const Card = styled.div`
         > div {
             display: flex;
             flex-direction: row;
-            align-items: center
+            align-items: center;
             justify-content: space-between;
             font-weight: 700;
             font-size: 18px;
