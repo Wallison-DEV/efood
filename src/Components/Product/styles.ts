@@ -38,5 +38,5 @@ export const Button = styled.button`
     background-color: ${Cores.rosa};
     border: none;
     outline: none;
-    padding: 4px;
+    padding: 4px 7px;
 `

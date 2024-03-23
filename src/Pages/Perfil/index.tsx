@@ -18,7 +18,6 @@ const Perfil = () => {
                 return res.json()
             })
             .then((data) => {
-                console.log(data)
                 setProduto(data)
             })
             .catch((error) => {
@@ -26,7 +25,6 @@ const Perfil = () => {
             })
     }, [id])
 
-    console.log(produto)
     if (!produto) {
         return <h3>Carregando...</h3>
     }
@@ -39,7 +37,7 @@ const Perfil = () => {
                 }}
             />
             <div className="container">
-                <ProductList produtos={[produto]} page="perfil" />
+                <ProductList produtos={[produto]} />
             </div>
         </>
     )
