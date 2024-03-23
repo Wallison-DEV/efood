@@ -112,7 +112,10 @@ const ProductList = ({ produtos }: ProductListProps) => {
                                 <p>{modal.descricao}</p>
                                 <p>Serve: {modal.porcao}</p>
                             </Information>
-                            <Button style={{ marginTop: '16px' }}>
+                            <Button
+                                type="btnModal"
+                                style={{ marginTop: '16px' }}
+                            >
                                 Adicionar ao carrinho -{' '}
                                 {formataPreco(modal.preco)}
                             </Button>

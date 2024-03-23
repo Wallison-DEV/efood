@@ -36,7 +36,11 @@ const Product = ({ cardapio }: ProductProps) => {
                         <img src={item.foto} alt={item.nome} />
                         <h3>{item.nome}</h3>
                         <Descricao>{truncateDescription}</Descricao>
-                        <Button className="cardButton" title="Saiba mais">
+                        <Button
+                            type="btnProduct"
+                            className="cardButton"
+                            title="Saiba mais"
+                        >
                             Adicionar ao carrinho
                         </Button>
                     </div>
