@@ -76,6 +76,7 @@ const ProductList = ({ produtos }: ProductListProps) => {
                                     <Product
                                         key={item.id}
                                         cardapio={[item]}
+                                        titulo={''}
                                         id={0}
                                         title={''}
                                         destacado={false}
