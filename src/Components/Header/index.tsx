@@ -12,7 +12,7 @@ const Header = () => (
             <Link to="/">
                 <img src={logo} alt="Logo" />
             </Link>
-            <LinkCart href="">0 - Produto(s)</LinkCart>
+            <LinkCart href="">0 - Produto(s) no carrinho</LinkCart>
         </div>
     </HeaderBar>
 )

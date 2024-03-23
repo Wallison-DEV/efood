@@ -11,6 +11,7 @@ type CardapioItem = {
 }
 
 export type ProductProps = {
+    titulo: string
     cardapio: CardapioItem[]
     id: number
     title: string
