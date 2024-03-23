@@ -19,6 +19,7 @@ const Perfil = () => {
             })
             .then((data) => {
                 setProduto(data)
+                console.log(data)
             })
             .catch((error) => {
                 console.error('Error fetching data:', error)
@@ -35,7 +36,12 @@ const Perfil = () => {
                 style={{
                     backgroundImage: `url(${produto.capa})`,
                 }}
-            />
+            >
+                <div className="container">
+                    <h4>{produto.tipo}</h4>
+                    <h3>{produto.titulo}</h3>
+                </div>
+            </RestauranteImagem>
             <div className="container">
                 <ProductList produtos={[produto]} />
             </div>
