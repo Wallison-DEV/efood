@@ -1,50 +1,59 @@
+import { useEffect, useState } from 'react'
 import Banner from '../../Components/Banner'
-import ProductList from '../../Components/ProductList'
-import Game from '../../models/Game'
+import RestauranteList from '../../Components/RestauranteList/'
 
-import imagem from '../../assets/images/imagem.png'
-import imagem1 from '../../assets/images/imagem1.png'
+export type RestauranteProps = {
+    id: number
+    title: string
+    description: string
+    infos: string[]
+    image: string
+    rating: number
+    tipo: string
+}
 
-const Promoções: Game[] = [
-    {
-        id: 1,
-        title: 'Hioki Sushi',
-        description: `Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida. \n
-        Experimente o Japão sem sair do lar com nosso delivery!`,
-        infos: ['Italiana'],
-        image: imagem,
-        rating: 4.5,
-    },
-    {
-        id: 2,
-        title: 'La Dolce Vita Trattoria',
-        description: `A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!`,
-        infos: ['Destaque da semana', 'Japonesa'],
-        image: imagem1,
-        rating: 4.7,
-    },
-    {
-        id: 1,
-        title: 'Hioki Sushi',
-        description: `Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega rápida, embalagens cuidadosas e qualidade garantida. \n
-        Experimente o Japão sem sair do lar com nosso delivery!`,
-        infos: ['Italiana'],
-        image: imagem,
-        rating: 4.5,
-    },
-    {
-        id: 2,
-        title: 'La Dolce Vita Trattoria',
-        description: `A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!`,
-        infos: ['Destaque da semana', 'Japonesa'],
-        image: imagem1,
-        rating: 4.7,
-    },
-]
+export const Home = () => {
+    const [restaurantes, setRestaurantes] = useState<RestauranteProps[]>([])
 
-export const Home = () => (
-    <>
-        <Banner />
-        <ProductList page='home' title="Promoções" games={Promoções} />
-    </>
-)
+    useEffect(() => {
+        fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error('Failed to fetch data')
+                }
+                return res.json()
+            })
+            .then((data) => {
+                const formattedData = data.map(
+                    (item: {
+                        tipo: any
+                        id: any
+                        titulo: any
+                        descricao: any
+                        capa: any
+                        avaliacao: any
+                    }) => ({
+                        id: item.id,
+                        title: item.titulo,
+                        description: item.descricao,
+                        infos: Array.isArray(item.tipo)
+                            ? item.tipo
+                            : [item.tipo],
+                        image: item.capa,
+                        rating: item.avaliacao,
+                    })
+                )
+                setRestaurantes(formattedData)
+            })
+            .catch((error) => {
+                console.error('Error fetching data:', error)
+            })
+    }, [])
+
+    return (
+        <>
+            <Banner />
+            <RestauranteList produto={restaurantes} />
+        </>
+    )
+}

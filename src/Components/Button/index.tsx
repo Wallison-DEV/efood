@@ -1,22 +1,12 @@
-import { ButtonLight, ButtonLink } from './styles'
+import { ButtonLink } from './styles'
 
 type ButtonProps = {
-    type: 'light' | 'dark'
     title: string
     to?: string
-    onClick?: () => void
     children: string
 }
 
-const Button = ({ type, title, children, onClick, to }: ButtonProps) => {
-    if (type == 'light') {
-        return (
-            <ButtonLight type="button" title={title} onClick={onClick}>
-                {children}
-            </ButtonLight>
-        )
-    }
-
+const Button = ({ title, children, to }: ButtonProps) => {
     return (
         <ButtonLink to={to as string} title={title}>
             {children}
