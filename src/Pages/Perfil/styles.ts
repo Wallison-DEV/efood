@@ -6,5 +6,4 @@ export const RestauranteImagem = styled.img`
     display: block;
     background-repeat: no-repeat;
     background-size: cover;
-    object-fit: cover;
 `

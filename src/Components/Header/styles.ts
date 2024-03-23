@@ -9,10 +9,18 @@ export const HeaderBar = styled.header`
     padding: 24px 174px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
     font-size: 18px;
     font-weight: 900;
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1024px;
+        width: 100%;
+        margin: 0 auto;
+    }
 `
 export const LinkCart = styled.a`
     display: flex;

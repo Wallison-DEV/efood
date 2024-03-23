@@ -29,6 +29,10 @@ export const Card = styled.div`
         border-bottom: 1px solid ${Cores.salmao};
         border-left: 1px solid ${Cores.salmao};
         border-right: 1px solid ${Cores.salmao};
+
+        h3 {
+            font-size: 18px;
+        }
         > div {
             display: flex;
             flex-direction: row;
