@@ -1,50 +1,31 @@
-import Tag from '../Tag'
-import { Card, Descricao, Infos, Titulo, Ratting } from './styles'
+import { CardProduct, Descricao, Titulo, Button } from './styles'
 
-import starImg from '../../assets/icons/estrela.png'
-import Button from '../Button'
-
-type ProductProps = {
-    title: string
+export type ProductProps = {
     description: string
-    infos: string[]
     image: string
-    rating: number
     id: number
+    title: string
+    porcao: string
+    preco: number
+    capa: string
 }
 
-const Product = ({
-    title,
-    description,
-    infos,
-    image,
-    rating,
-    id,
-}: ProductProps) => (
-    <Card>
-        <img src={image} alt={title} />
-        {infos && infos.length > 0 && (
-            <Infos>
-                {infos.map((info) => (
-                    <Tag key={info}>{info}</Tag>
-                ))}
-            </Infos>
-        )}
-        <div>
-            <Titulo>{title}</Titulo>
-            <Ratting>
-                {rating && rating.toString()}{' '}
-                <img src={starImg} alt="Estrela de classificação" />
-            </Ratting>
-        </div>
-        <Descricao>{description}</Descricao>
-        <Button
-            type="dark"
-            title="Saiba mais"
-            children="Saiba mais"
-            to={`/perfil/${id}`}
-        ></Button>
-    </Card>
-)
+const Product = ({ description, image, title }: ProductProps) => {
+    const truncatedDescription =
+        description.length > 125
+            ? description.substring(0, 125) + '...'
+            : description
+
+    return (
+        <CardProduct>
+            <div>
+                <img src={image} alt={title} />
+                <Titulo>{title}</Titulo>
+                <Descricao>{truncatedDescription}</Descricao>
+            </div>
+            <Button title="Saiba mais">Adicionar ao carrinho</Button>
+        </CardProduct>
+    )
+}
 
 export default Product

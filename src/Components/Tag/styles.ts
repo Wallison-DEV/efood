@@ -1,13 +1,11 @@
 import { styled } from 'styled-components'
 import { Cores } from '../../styles'
 
-import { TagProps } from '.'
-
-export const TagContainer = styled.div<TagProps>`
+export const TagContainer = styled.div`
     background-color: ${Cores.salmao};
-    color: ${Cores.bege};
-    font-size: ${(props) => (props.size === 'big' ? '16px' : '10px')};
+    color: ${Cores.rosa};
+    font-size: 12px;
     font-weight: bold;
-    padding: ${(props) => (props.size === 'big' ? '8px 16px' : '4px 6px')};
+    padding: 6px 10px;
     display: inline-block;
 `

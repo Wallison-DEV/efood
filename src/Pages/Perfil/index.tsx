@@ -1,18 +1,16 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { ProdutoProps } from '../Home'
-import ProductList from '../../Components/ProductList'
-import { Imagem } from '../../Components/Banner/styles'
+import ProductList from '../../Components/ProductList/index'
+import { ProductProps } from '../../Components/Product'
+import { RestauranteImagem } from './styles'
 import Header from '../../Components/Header'
 
 const Perfil = () => {
     const { id } = useParams()
-    const [produto, setProduto] = useState<ProdutoProps | null>(null)
+    const [produto, setProduto] = useState<ProductProps | null>(null)
 
     useEffect(() => {
-        fetch(
-            `https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}/prato`
-        )
+        fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error('Failed to fetch data')
@@ -20,18 +18,8 @@ const Perfil = () => {
                 return res.json()
             })
             .then((data) => {
-                const formattedData = {
-                    id: data.id,
-                    title: data.titulo,
-                    description: data.descricao,
-                    infos: data.cardapio.map(
-                        (item: { nome: any }) => item.nome
-                    ),
-                    image: data.capa,
-                    rating: data.avaliacao,
-                }
-                console.log(formattedData)
-                setProduto(formattedData)
+                console.log(data)
+                setProduto(data)
             })
             .catch((error) => {
                 console.error('Error fetching data:', error)
@@ -45,13 +33,13 @@ const Perfil = () => {
     return (
         <>
             <Header />
-            <Imagem
+            <RestauranteImagem
                 style={{
-                    backgroundImage: `url(${produto.image})`,
+                    backgroundImage: `url(${produto.capa})`,
                 }}
             />
             <div className="container">
-                <ProductList title="" produto={[produto]} page="perfil" />
+                <ProductList produtos={[produto]} page="perfil" />
             </div>
         </>
     )

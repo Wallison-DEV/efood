@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react'
 import Banner from '../../Components/Banner'
-import ProductList from '../../Components/ProductList'
+import RestauranteList from '../../Components/RestauranteList/'
 
-export type ProdutoProps = {
+export type RestauranteProps = {
     id: number
     title: string
     description: string
     infos: string[]
     image: string
     rating: number
+    tipo: string
 }
 
 export const Home = () => {
-    const [produtos, setProdutos] = useState<ProdutoProps[]>([])
+    const [restaurantes, setRestaurantes] = useState<RestauranteProps[]>([])
 
     useEffect(() => {
         fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
@@ -25,25 +26,24 @@ export const Home = () => {
             .then((data) => {
                 const formattedData = data.map(
                     (item: {
+                        tipo: any
                         id: any
                         titulo: any
                         descricao: any
-                        cardapio: any[]
                         capa: any
                         avaliacao: any
                     }) => ({
                         id: item.id,
                         title: item.titulo,
                         description: item.descricao,
-                        infos: item.cardapio.map(
-                            (item: { nome: any }) => item.nome
-                        ),
+                        infos: Array.isArray(item.tipo)
+                            ? item.tipo
+                            : [item.tipo],
                         image: item.capa,
                         rating: item.avaliacao,
                     })
                 )
-                console.log(formattedData)
-                setProdutos(formattedData)
+                setRestaurantes(formattedData)
             })
             .catch((error) => {
                 console.error('Error fetching data:', error)
@@ -53,7 +53,7 @@ export const Home = () => {
     return (
         <>
             <Banner />
-            <ProductList title="Produtos" produto={produtos} page="home" />
+            <RestauranteList produto={restaurantes} />
         </>
     )
 }

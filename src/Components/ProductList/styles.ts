@@ -1,26 +1,16 @@
 import styled from 'styled-components'
 
 import { ProductListProps } from '.'
-import { Cores } from '../../styles'
-import { Card } from '../Product/styles'
 
 export const Container = styled.section<
-    Omit<ProductListProps, 'title' | 'produto'>
+    Omit<ProductListProps, 'title' | 'produtos'>
 >`
-    padding: 26px 0 80px;
-
-    ${Card} {
-        width: ${(props) => (props.page === 'home' ? '472px' : '320px')};
-        background-color: ${Cores.branco};
-        border: 1px solid ${Cores.salmao};
-    }
+    padding: 56px 0 120px;
 `
-export const List = styled.ul<Omit<ProductListProps, 'title' | 'produto'>>`
+export const List = styled.ul`
     display: grid;
-    grid-template-columns: ${(props) =>
-        props.page === 'home' ? '1fr 1fr' : '1fr 1fr 1fr'};
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 24px;
-    margin-top: 40px;
 `
 export const Title = styled.h2`
     font-weight: bold;
