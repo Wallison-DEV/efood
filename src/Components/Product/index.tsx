@@ -1,29 +1,47 @@
-import { CardProduct, Descricao, Titulo, Button } from './styles'
+import { CardProduct, Descricao, Button } from './styles'
+
+type CardapioItem = {
+    capa: string
+    foto: string
+    preco: number
+    id: number
+    nome: string
+    descricao: string
+    porcao: string
+}
 
 export type ProductProps = {
-    description: string
-    image: string
+    cardapio: CardapioItem[]
     id: number
     title: string
-    porcao: string
-    preco: number
+    destacado: boolean
+    tipo: string
+    avaliacao: number
+    descricao: string
+    image: string
     capa: string
 }
 
-const Product = ({ description, image, title }: ProductProps) => {
-    const truncatedDescription =
-        description.length > 125
-            ? description.substring(0, 125) + '...'
-            : description
-
+const Product = ({ cardapio }: ProductProps) => {
     return (
         <CardProduct>
-            <div>
-                <img src={image} alt={title} />
-                <Titulo>{title}</Titulo>
-                <Descricao>{truncatedDescription}</Descricao>
-            </div>
-            <Button title="Saiba mais">Adicionar ao carrinho</Button>
+            {cardapio.map((item) => {
+                const truncateDescription =
+                    item.descricao.length > 125
+                        ? item.descricao.substring(0, 125) + '...'
+                        : item.descricao
+
+                return (
+                    <div key={item.id}>
+                        <img src={item.foto} alt={item.nome} />
+                        <h3>{item.nome}</h3>
+                        <Descricao>{truncateDescription}</Descricao>
+                        <Button className="cardButton" title="Saiba mais">
+                            Adicionar ao carrinho
+                        </Button>
+                    </div>
+                )
+            })}
         </CardProduct>
     )
 }

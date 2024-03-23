@@ -1,4 +1,4 @@
-import Product from '../Product/index'
+import Product, { ProductProps } from '../Product/index'
 import {
     Container,
     List,
@@ -8,29 +8,11 @@ import {
     CloseIcon,
 } from './styles'
 import { useState } from 'react'
-
 import closeImg from '../../assets/icons/close.png'
 import { Button } from '../Product/styles'
 
 export type ProductListProps = {
-    produtos: {
-        cardapio: {
-            capa: string
-            foto: string
-            preco: number
-            id: number
-            nome: string
-            descricao: string
-            porcao: string
-        }[]
-        id: number
-        titulo: string
-        destacado: boolean
-        tipo: string
-        avaliacao: number
-        descricao: string
-        capa: string
-    }[]
+    produtos: ProductProps[]
 }
 
 export const formataPreco = (preco = 0) => {
@@ -84,29 +66,29 @@ const ProductList = ({ produtos }: ProductListProps) => {
         <Container>
             <div className="container">
                 {produtos && produtos.length > 0 ? (
-                    produtos.map((produto) => (
-                        <div key={produto.id}>
-                            <List>
-                                {produto.cardapio.map((item) => (
-                                    <div
+                    <List>
+                        {produtos.map((produto) =>
+                            produto.cardapio.map((item) => (
+                                <div
+                                    key={item.id}
+                                    onClick={() => openModal(item)}
+                                >
+                                    <Product
                                         key={item.id}
-                                        onClick={() => openModal(item)} // Alteração aqui
-                                    >
-                                        <Product
-                                            key={item.id}
-                                            title={item.nome}
-                                            description={item.descricao}
-                                            image={item.foto}
-                                            id={item.id}
-                                            porcao={item.porcao}
-                                            preco={item.preco}
-                                            capa={item.capa}
-                                        />
-                                    </div>
-                                ))}
-                            </List>
-                        </div>
-                    ))
+                                        cardapio={[item]}
+                                        id={0}
+                                        title={''}
+                                        destacado={false}
+                                        tipo={''}
+                                        avaliacao={0}
+                                        descricao={''}
+                                        image={''}
+                                        capa={''}
+                                    />
+                                </div>
+                            ))
+                        )}
+                    </List>
                 ) : (
                     <p>No products available.</p>
                 )}
@@ -120,16 +102,16 @@ const ProductList = ({ produtos }: ProductListProps) => {
                             alt={modal.title}
                         />
                         <div>
-                            <h4>{modal.title}</h4>
-                            <Information>
-                                <p>{modal.descricao}</p>
-                                <p>Serve: {modal.porcao}</p>
-                            </Information>
                             <CloseIcon
                                 src={closeImg}
                                 alt="Fechar"
                                 onClick={closeModal}
                             />
+                            <h4>{modal.title}</h4>
+                            <Information>
+                                <p>{modal.descricao}</p>
+                                <p>Serve: {modal.porcao}</p>
+                            </Information>
                             <Button style={{ marginTop: '16px' }}>
                                 Adicionar ao carrinho -{' '}
                                 {formataPreco(modal.preco)}

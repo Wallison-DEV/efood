@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Cores } from '../../styles'
 
 export const CardProduct = styled.div`
+    position: relative;
     padding: 8px;
     display: flex;
     flex-direction: column;
@@ -18,10 +19,13 @@ export const CardProduct = styled.div`
         object-fit: cover;
         margin-bottom: 8px;
     }
+
+    .cardButton {
+        position: absolute;
+        bottom: 8px;
+        left: 8px;
+    }
 `
-
-export const Titulo = styled.h3``
-
 export const Descricao = styled.p`
     font-size: 14px;
     line-height: 22px;
@@ -31,6 +35,7 @@ export const Descricao = styled.p`
 `
 export const Button = styled.button`
     display: block;
+    width: 304px;
     height: 24px;
     font-weight: 700;
     size: 14px;
