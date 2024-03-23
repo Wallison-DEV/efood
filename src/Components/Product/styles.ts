@@ -17,6 +17,11 @@ export const CardProduct = styled.div`
     color: ${Cores.rosa};
     background-color: ${Cores.salmao};
 
+    h3 {
+        font-size: 16px;
+        font-weight: 900px;
+    }
+
     img {
         width: 100%;
         height: 167px;
