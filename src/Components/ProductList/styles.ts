@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Cores } from '../../styles'
+import { Cores, breakpoints } from '../../styles'
+import { Button } from '../Button/styles'
 
 export const Container = styled.section`
     padding: 56px 0 120px;
@@ -8,6 +9,16 @@ export const List = styled.ul`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 24px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
+    }
+    @media (max-width: ${breakpoints.tablet}) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 `
 export const Modal = styled.div`
     position: fixed;
@@ -40,7 +51,6 @@ export const ModalContent = styled.div`
     width: 1024px;
     height: 344px;
     padding: 32px;
-
     background-color: ${Cores.salmao};
     color: ${Cores.branco};
 
@@ -56,6 +66,32 @@ export const ModalContent = styled.div`
         margin-right: 24px;
         object-fit: cover;
     }
+    @media (max-width: ${breakpoints.desktop}) {
+        padding: 24px; 
+        margin: 40px auto;
+    }
+    @media (max-width: ${breakpoints.tablet}) {
+        flex-direction: column;
+        height: auto; 
+        align-items: center; 
+        text-align: center; 
+        padding: 24px; 
+        margin: 10vh auto;
+
+        .productImg {
+            width: 100%;
+            height: auto; 
+            margin: 16px 0;
+        }
+
+        h4 {
+            margin-top: 0; 
+        }
+
+        ${Button} {
+            width: 100%;
+        }
+    }
 `
 export const Information = styled.div`
     display: flex;
@@ -66,6 +102,13 @@ export const Information = styled.div`
     line-height: 22px;
     width: 656px;
     height: 176px;
+    
+    @media (max-width: ${breakpoints.desktop}) {
+        justify-content: center;
+        max-width: 100%;
+        width: 100%;
+        gap: 8px;
+    }
 `
 
 export const CloseIcon = styled.img`

@@ -1,59 +1,38 @@
-import { useEffect, useState } from 'react'
 import Banner from '../../Components/Banner'
 import RestauranteList from '../../Components/RestauranteList/'
+import {useGetRestaurantListQuery} from '../../services/api'
 
 export type RestauranteProps = {
-    id: number
-    title: string
-    description: string
-    infos: string[]
-    image: string
-    rating: number
-    tipo: string
-}
+    id: number;
+    titulo: string;
+    destacado: boolean;
+    tipo: string[];
+    avaliacao: number;
+    descricao: string;
+    capa: string;
+    cardapio: {
+        foto: string;
+        preco: number;
+        id: number;
+        nome: string;
+        description: string;
+        porcao: string;
+    }[];
+};
+
 
 export const Home = () => {
-    const [restaurantes, setRestaurantes] = useState<RestauranteProps[]>([])
+    const { data: restaurantes } = useGetRestaurantListQuery();
 
-    useEffect(() => {
-        fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error('Failed to fetch data')
-                }
-                return res.json()
-            })
-            .then((data) => {
-                const formattedData = data.map(
-                    (item: {
-                        tipo: any
-                        id: any
-                        titulo: any
-                        descricao: any
-                        capa: any
-                        avaliacao: any
-                    }) => ({
-                        id: item.id,
-                        title: item.titulo,
-                        description: item.descricao,
-                        infos: Array.isArray(item.tipo)
-                            ? item.tipo
-                            : [item.tipo],
-                        image: item.capa,
-                        rating: item.avaliacao,
-                    })
-                )
-                setRestaurantes(formattedData)
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error)
-            })
-    }, [])
-
+    if (!restaurantes || restaurantes.length === 0) {
+        return <h3>Carregando...</h3>;
+    }
+    
     return (
         <>
             <Banner />
-            <RestauranteList produto={restaurantes} />
+            <RestauranteList restaurantes={restaurantes} />
         </>
     )
 }
+

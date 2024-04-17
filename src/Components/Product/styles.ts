@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 import { Cores } from '../../styles'
 
-export type ButtonProps = {
-    type: 'btnModal' | 'btnProduct'
-}
-
 export const CardProduct = styled.div`
     position: relative;
     padding: 8px;
@@ -41,16 +37,4 @@ export const Descricao = styled.p`
     display: block;
     padding-top: 8px;
     padding-bottom: 8px;
-`
-export const Button = styled.button<ButtonProps>`
-    display: block;
-    width: ${(props) => (props.type === 'btnModal' ? '218px' : '304px')};
-    height: 24px;
-    font-weight: 700;
-    font-size: 14px;
-    color: ${Cores.salmao};
-    background-color: ${Cores.rosa};
-    border: none;
-    outline: none;
-    padding: 4px 7px;
 `
