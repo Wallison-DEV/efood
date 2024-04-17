@@ -16,13 +16,13 @@ const Cart = () => {
         dispatch(close())
     }
 
-    const removeCartItem = (id: number) => {
-        dispatch(remove(id))
+    const removeCartItem = (index: number) => {
+        dispatch(remove(index));
     }
 
     const getTotalPrice = () => {
-        return items.reduce((acumulador: any, valorAtual: { item: { preco: number }; quantity: number }) => {
-            return (acumulador += valorAtual.item.preco * valorAtual.quantity);
+        return items.reduce((acumulador: any, valorAtual: { preco: any }) => {
+            return (acumulador += valorAtual.preco!)
         }, 0)
     }
     
@@ -31,24 +31,24 @@ const Cart = () => {
             <Overlay onClick={closeCart}/>
             <Sidebar>
                 <ul>
-                    {items.map((item: { item: { id: number; foto: string | undefined; nome: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined; preco: number | undefined }; quantity: number }) => (
-                        <CartItem key={item.item.id}>
-                            <img src={item.item.foto}  />
-                            <div>
-                                <h3>{item.item.nome} {item.quantity > 1 ? `(${item.quantity}x)` : ''}</h3>
-                                <span>{formataPreco(item.item.preco)}</span>
-                            </div>
-                            <button
-                                onClick={() => removeCartItem(item.item.id)}
-                                type="button"
-                            />
-                        </CartItem>
-                    ))}
+                {items.map((item: { id: number; foto: string | undefined; nome: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined; preco: number | undefined }, index: number) => (
+                    <CartItem key={item.id}>
+                        <img src={item.foto}  />
+                        <div>
+                            <h3>{item.nome}</h3>
+                            <span>{formataPreco(item.preco)}</span>
+                        </div>
+                        <button
+                            onClick={() => removeCartItem(index)}
+                            type="button"
+                        />
+                    </CartItem>
+                ))}
                 </ul>
-                <div>
+                <div style={{display:'flex', justifyContent:'space-between'}}>
                     <p>Valor total</p><span>{formataPreco(getTotalPrice())}</span>
                 </div>
-                <Button type="btnProduct">Continuar com a entrega</Button>
+                <Button style={{width: '100%'}} type="btnProduct">Continuar com a entrega</Button>
             </Sidebar>
         </CartContainer>
     )

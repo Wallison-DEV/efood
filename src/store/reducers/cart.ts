@@ -1,13 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CardapioItem } from '../../Components/Product';
 
-interface CartItem {
-    item: CardapioItem;
-    quantity: number;
-}
-
 interface CartState {
-    items: CartItem[];
+    items: CardapioItem[];
     isOpen: boolean;
 }
 
@@ -21,12 +16,7 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         add: (state, action: PayloadAction<CardapioItem>) => {
-            const existingItemIndex = state.items.findIndex(item => item.item.id === action.payload.id);
-            if (existingItemIndex !== -1) {
-                state.items[existingItemIndex].quantity += 1;
-            } else {
-                state.items.push({ item: action.payload, quantity: 1 });
-            }
+            state.items.push(action.payload);
         },
         open: (state)=>{
             state.isOpen = true;
@@ -35,14 +25,7 @@ const cartSlice = createSlice({
             state.isOpen = false;
         },
         remove: (state, action: PayloadAction<number>) => {
-            const itemIndex = state.items.findIndex((item) => item.item.id === action.payload);
-            if (itemIndex !== -1) {
-                if (state.items[itemIndex].quantity > 1) {
-                    state.items[itemIndex].quantity -= 1;
-                } else {
-                    state.items.splice(itemIndex, 1);
-                }
-            }
+            state.items.splice(action.payload, 1);
         },
     },
 });
