@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { TagContainer } from '../Tag/styles'
-import { Cores } from '../../styles'
+import { Cores, breakpoints } from '../../styles'
 
 export const Card = styled.div`
     position: relative;
@@ -10,6 +10,12 @@ export const Card = styled.div`
     justify-content: space-between;
     width: 472px;
     height: 398px;
+
+    @media (max-width: ${breakpoints.desktop}) {
+        max-width: 100%;
+        height: 432px;
+        justify-content: center;
+    }
 
     ${TagContainer} {
     }
@@ -25,6 +31,10 @@ export const Card = styled.div`
         flex-direction: column;
         justify-content: space-between;
         padding: 8px;
+
+        @media (max-width: ${breakpoints.tablet}) {
+            height: 100%;
+        }
 
         border-bottom: 1px solid ${Cores.salmao};
         border-left: 1px solid ${Cores.salmao};

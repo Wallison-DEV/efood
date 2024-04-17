@@ -1,7 +1,7 @@
-import { CardProduct, Descricao, Button } from './styles'
+import { CardProduct, Descricao } from './styles'
+import { Button } from '../Button/styles'
 
-type CardapioItem = {
-    capa: string
+export type CardapioItem = {
     foto: string
     preco: number
     id: number
@@ -11,16 +11,7 @@ type CardapioItem = {
 }
 
 export type ProductProps = {
-    titulo: string
     cardapio: CardapioItem[]
-    id: number
-    title: string
-    destacado: boolean
-    tipo: string
-    avaliacao: number
-    descricao: string
-    image: string
-    capa: string
 }
 
 const Product = ({ cardapio }: ProductProps) => {
@@ -42,7 +33,7 @@ const Product = ({ cardapio }: ProductProps) => {
                             className="cardButton"
                             title="Saiba mais"
                         >
-                            Adicionar ao carrinho
+                            Mais detalhes
                         </Button>
                     </div>
                 )

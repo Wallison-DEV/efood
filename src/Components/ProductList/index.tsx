@@ -1,4 +1,6 @@
-import Product, { ProductProps } from '../Product/index'
+import { useDispatch } from 'react-redux'
+
+import Product, { CardapioItem, ProductProps } from '../Product/index'
 import {
     Container,
     List,
@@ -9,7 +11,9 @@ import {
 } from './styles'
 import { useState } from 'react'
 import closeImg from '../../assets/icons/close.png'
-import { Button } from '../Product/styles'
+import { Button } from '../Button/styles'
+
+import { add } from '../../store/reducers/cart'
 
 export type ProductListProps = {
     produtos: ProductProps[]
@@ -23,6 +27,12 @@ export const formataPreco = (preco = 0) => {
 }
 
 const ProductList = ({ produtos }: ProductListProps) => {
+    const dispatch = useDispatch()
+
+    const addToCart = (item : CardapioItem) => {
+        dispatch(add(item))
+    }
+    
     const [modal, setModal] = useState({
         estaVisivel: false,
         url: '',
@@ -30,17 +40,10 @@ const ProductList = ({ produtos }: ProductListProps) => {
         descricao: '',
         preco: 0,
         porcao: '',
+        selectedItem: {} as CardapioItem,
     })
 
-    const openModal = (item: {
-        capa?: string
-        foto: any
-        preco: any
-        id?: number
-        nome: any
-        descricao: any
-        porcao: any
-    }) => {
+    const openModal = (item: CardapioItem) => {
         setModal({
             estaVisivel: true,
             url: item.foto,
@@ -48,6 +51,7 @@ const ProductList = ({ produtos }: ProductListProps) => {
             descricao: item.descricao,
             preco: item.preco,
             porcao: item.porcao,
+            selectedItem: item, 
         })
     }
 
@@ -59,8 +63,10 @@ const ProductList = ({ produtos }: ProductListProps) => {
             descricao: '',
             preco: 0,
             porcao: '',
+            selectedItem: {} as CardapioItem,
         })
     }
+
 
     return (
         <Container>
@@ -76,15 +82,6 @@ const ProductList = ({ produtos }: ProductListProps) => {
                                     <Product
                                         key={item.id}
                                         cardapio={[item]}
-                                        titulo={''}
-                                        id={0}
-                                        title={''}
-                                        destacado={false}
-                                        tipo={''}
-                                        avaliacao={0}
-                                        descricao={''}
-                                        image={''}
-                                        capa={''}
                                     />
                                 </div>
                             ))
@@ -116,6 +113,7 @@ const ProductList = ({ produtos }: ProductListProps) => {
                             <Button
                                 type="btnModal"
                                 style={{ marginTop: '16px' }}
+                                onClick={() => addToCart(modal.selectedItem)}
                             >
                                 Adicionar ao carrinho -{' '}
                                 {formataPreco(modal.preco)}

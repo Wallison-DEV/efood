@@ -1,47 +1,42 @@
-import Tag from '../Tag'
-import { Card, Descricao, Infos, Ratting } from './styles'
+import Tag from '../Tag';
+import { Card, Descricao, Infos, Ratting } from './styles';
 
-import starImg from '../../assets/icons/estrela.png'
-import Button from '../Button'
-
-type ProductProps = {
-    title: string
-    description: string
-    infos: string[]
-    image: string
-    rating: number
-    id: number
-}
+import starImg from '../../assets/icons/estrela.png';
+import Button from '../Button';
+import { RestauranteProps } from '../../Pages/Home';
 
 const Restaurante = ({
-    title,
-    description,
-    infos,
-    image,
-    rating,
+    titulo,
+    descricao,
+    tipo,
+    capa,
+    avaliacao,
     id,
-}: ProductProps) => {
+}: RestauranteProps) => {
     const truncatedDescription =
-        description.length > 248
-            ? description.substring(0, 248) + '...'
-            : description
+        descricao && descricao.length > 248
+            ? descricao.substring(0, 248) + '...'
+            : descricao || '';
 
     return (
         <Card>
-            <img src={image} alt={title} />
-            {infos && infos.length > 0 && (
+            <img src={capa} alt={titulo} />
+            {Array.isArray(tipo) && tipo.length > 0 && (
                 <Infos>
-                    {infos.map((info) => (
-                        <Tag key={info}>{info}</Tag>
+                    {tipo.map((info, index) => (
+                        <Tag key={index}>{info}</Tag>
                     ))}
                 </Infos>
             )}
             <section>
                 <div>
-                    <h3>{title}</h3>
+                    <h3>{titulo}</h3>
                     <Ratting>
-                        {rating && rating.toString()}{' '}
-                        <img src={starImg} alt="Estrela de classificação" />
+                        {avaliacao && avaliacao.toString()}{' '}
+                        <img
+                            src={starImg}
+                            alt="Estrela de classificação"
+                        />
                     </Ratting>
                 </div>
                 <Descricao>{truncatedDescription}</Descricao>
@@ -49,10 +44,10 @@ const Restaurante = ({
                     title="Saiba mais"
                     children="Saiba mais"
                     to={`/perfil/${id}`}
-                ></Button>
+                />
             </section>
         </Card>
-    )
-}
+    );
+};
 
-export default Restaurante
+export default Restaurante;
