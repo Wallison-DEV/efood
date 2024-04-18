@@ -3,9 +3,10 @@ import { ReactElement, JSXElementConstructor, ReactNode } from "react"
 
 import { Button } from "../Button/styles"
 import { formataPreco } from "../ProductList"
-import { CartContainer, CartItem, Overlay, Sidebar } from "./styles"
+import { CartContainer, CartItem, Overlay, Sidebar, ButtonDiv } from "./styles"
 import { RootReducer } from "../../store"
-import { close, remove } from "../../store/reducers/cart"
+import { close, remove, add, decrement } from "../../store/reducers/cart"
+import { CardapioItem } from "../Product"
 
 const Cart = () => {
     const { items, isOpen } = useSelector((state: RootReducer) => state.cart)
@@ -20,6 +21,15 @@ const Cart = () => {
         dispatch(remove(id))
     }
 
+    const handleIncrement = (id: number) => {
+        const item: CardapioItem = { id: id, foto: '', preco: 0, nome: '', descricao: '', porcao: '' };
+        dispatch(add(item));
+    };
+
+    const handleDecrement = (id: number) => {
+        dispatch(decrement(id)); 
+    };
+    
     const getTotalPrice = () => {
         return items.reduce((acumulador: any, valorAtual: { item: { preco: number }; quantity: number }) => {
             return (acumulador += valorAtual.item.preco * valorAtual.quantity);
@@ -35,13 +45,19 @@ const Cart = () => {
                         <CartItem key={item.item.id}>
                             <img src={item.item.foto}  />
                             <div>
-                                <h3>{item.item.nome} {item.quantity > 1 ? `(${item.quantity}x)` : ''}</h3>
+                                <h3>{item.item.nome}</h3>
                                 <span>{formataPreco(item.item.preco)}</span>
                             </div>
-                            <button
-                                onClick={() => removeCartItem(item.item.id)}
-                                type="button"
-                            />
+                            <ButtonDiv>
+                                <button onClick={()=> handleDecrement(item.item.id)} type="button">-</button>
+                                <span>{item.quantity}x</span>
+                                <button onClick={()=> handleIncrement(item.item.id)} type="button">+</button>
+                                <button
+                                    className="lixeira"
+                                    onClick={() => removeCartItem(item.item.id)}
+                                    type="button"
+                                />
+                            </ButtonDiv>
                         </CartItem>
                     ))}
                 </ul>
