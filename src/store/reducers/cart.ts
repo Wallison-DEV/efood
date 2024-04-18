@@ -21,20 +21,17 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         add: (state, action: PayloadAction<CardapioItem>) => {
-            const existingItemIndex = state.items.findIndex(item => item.item.id === action.payload.id);
-            if (existingItemIndex !== -1) {
-                state.items[existingItemIndex].quantity += 1;
+            const { items } = state;
+            const { id } = action.payload;
+            const existingItem = items.find(item => item.item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
             } else {
-                state.items.push({ item: action.payload, quantity: 1 });
+                state.items = [...items, { item: action.payload, quantity: 1 }];
             }
         },
-        open: (state)=>{
-            state.isOpen = true;
-        },
-        close: (state)=>{
-            state.isOpen = false;
-        },
-        remove: (state, action: PayloadAction<number>) => {
+        decrement: (state, action: PayloadAction<number>) => {
             const itemIndex = state.items.findIndex((item) => item.item.id === action.payload);
             if (itemIndex !== -1) {
                 if (state.items[itemIndex].quantity > 1) {
@@ -44,8 +41,19 @@ const cartSlice = createSlice({
                 }
             }
         },
+        remove: (state, action:PayloadAction<number>) =>{
+            state.items = state.items.filter(
+                (item) => item.item.id !== action.payload
+            )
+        },
+        open: (state)=>{
+            state.isOpen = true;
+        },
+        close: (state)=>{
+            state.isOpen = false;
+        },
     },
 });
 
-export const { add, open, close, remove } = cartSlice.actions;
+export const { add, open, close, remove, decrement } = cartSlice.actions;
 export default cartSlice.reducer;

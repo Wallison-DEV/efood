@@ -81,16 +81,28 @@ export const CartItem = styled.div`
         font-size: 14px;
         font-weght: 400;
     }
-
+    `
+export const ButtonDiv = styled.div`
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    display: flex; 
+    gap: 4px;
+    align-items: center;
+    text-align: center;
     button {
-        position: absolute;
-        bottom: 8px;
-        right: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 16px;
-        height: 16px;
-        background-image: url(${excluirIcon});
+        height: 16px; 
         background-color: transparent;
         border: none;
         cursor: pointer;
+        font-size: 1.3rem;
     }
+    .lixeira {
+        background-image: url(${excluirIcon});
+    }
+    
 `

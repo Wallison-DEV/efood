@@ -13,7 +13,7 @@ import { useState } from 'react'
 import closeImg from '../../assets/icons/close.png'
 import { Button } from '../Button/styles'
 
-import { add } from '../../store/reducers/cart'
+import { add, open } from '../../store/reducers/cart'
 
 export type ProductListProps = {
     produtos: ProductProps[]
@@ -29,10 +29,15 @@ export const formataPreco = (preco = 0) => {
 const ProductList = ({ produtos }: ProductListProps) => {
     const dispatch = useDispatch()
 
+    const openCart = () => {
+        dispatch(open())
+    }
+
     const addToCart = (item : CardapioItem) => {
         dispatch(add(item))
     }
     
+
     const [modal, setModal] = useState({
         estaVisivel: false,
         url: '',
@@ -113,7 +118,7 @@ const ProductList = ({ produtos }: ProductListProps) => {
                             <Button
                                 type="btnModal"
                                 style={{ marginTop: '16px' }}
-                                onClick={() => addToCart(modal.selectedItem)}
+                                onClick={() => {addToCart(modal.selectedItem); openCart()}}
                             >
                                 Adicionar ao carrinho -{' '}
                                 {formataPreco(modal.preco)}
