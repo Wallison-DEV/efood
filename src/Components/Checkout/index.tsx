@@ -57,38 +57,38 @@ const Checkout = () => {
         },
         validationSchema: Yup.object({
             receiver: Yup.string()
-                .required('O campo é obrigatório')
-                .min(5, 'O nome deve ter ao menos 5 letras'),
+                .required('O campo do nome do destinatário é obrigatório')
+                .min(5, 'O nome deve ter pelo menos 5 letras'),
             address: Yup.string()
-                .required('O campo é obrigatório')
-                .min(10, 'O endereço deve ter ao menos 10 letras'),
+                .required('O campo do endereço é obrigatório')
+                .min(10, 'O endereço deve ter pelo menos 10 letras'),
             city: Yup.string()
-                .required('O campo é obrigatório')
-                .min(5, 'O nome da cidade deve ter ao menos 5 letras'),
+                .required('O campo da cidade é obrigatório')
+                .min(5, 'O nome da cidade deve ter pelo menos 5 letras'),
             zipCode: Yup.string()
                 .transform((value) => parseValue(value))
                 .length(8, 'O CEP deve ter exatamente 8 dígitos')
-                .required('O campo é obrigatório'),
-            numberAddress: Yup.string().required('O campo é obrigatório'),
+                .required('O campo do CEP é obrigatório'),
+            numberAddress: Yup.string().required('O campo do número é obrigatório'),
             complement: Yup.string(),
             cardName: Yup.string()
-                .required('O campo é obrigatório')
-                .min(10, 'O nome no cartão deve ter ao menos 10 letras'),
+                .min(10, 'O nome no cartão deve ter pelo menos 10 letras')
+                .required('O campo do nome do cartão é obrigatório'),
             cardNumber: Yup.string()
                 .transform((value) => parseValue(value))
                 .length(16, 'O número do cartão deve ter exatamente 16 dígitos')
-                .required('O campo é obrigatório'),
+                .required('O campo do número do cartão é obrigatório'),
             cardCode: Yup.string()
-                .required('O campo é obrigatório')
-                .length(3, 'O CVV deve ter exatamente 3 dígitos'),
+                .length(3, 'O CVV deve ter exatamente 3 dígitos')
+                .required('O campo do CVV é obrigatório'),
             expiresYear: Yup.string()
                 .transform((value) => parseValue(value))
-                .length(2, 'O mês deve ter exatamente 2 dígitos')
-                .required('O campo é obrigatório'),
+                .length(2, 'O mês de expiração deve ter exatamente 2 dígitos')
+                .required('O campo do ano de expiração é obrigatório'),
             expiresMonth: Yup.string()
                 .transform((value) => parseValue(value))
-                .length(2, 'O ano deve ter exatamente 2 dígitos')
-                .required('O campo é obrigatório'),
+                .length(2, 'O ano de expiração deve ter exatamente 2 dígitos')
+                .required('O campo do mês de expiração é obrigatório'),
         }),
         onSubmit: (values) => {
             console.log('Submitting form', values)
