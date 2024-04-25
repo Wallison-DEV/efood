@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { Cores, breakpoints } from '../../styles'
-import { Button } from '../Button/styles'
+import { Colors, breakpoints } from '../../styles'
 
 export const Container = styled.section`
     padding: 56px 0 120px;
@@ -51,8 +50,8 @@ export const ModalContent = styled.div`
     width: 1024px;
     height: 344px;
     padding: 32px;
-    background-color: ${Cores.salmao};
-    color: ${Cores.branco};
+    background-color: ${Colors.salmon};
+    color: ${Colors.white};
 
     h4 {
         font-size: 18px;
@@ -67,29 +66,29 @@ export const ModalContent = styled.div`
         object-fit: cover;
     }
     @media (max-width: ${breakpoints.desktop}) {
-        padding: 24px; 
+        padding: 24px;
         margin: 40px auto;
     }
     @media (max-width: ${breakpoints.tablet}) {
         flex-direction: column;
-        height: auto; 
-        align-items: center; 
-        text-align: center; 
-        padding: 24px; 
-        margin: 10vh auto;
+        height: auto;
+        align-items: center;
+        text-align: center;
+        padding: 24px;
+        margin: 5vh auto;
+        width: 90%;
+        max-width: 100%;
+        max-height: 90vh;
 
         .productImg {
             width: 100%;
-            height: auto; 
+            height: auto;
+            max-height: 30vh;
             margin: 16px 0;
         }
 
         h4 {
-            margin-top: 0; 
-        }
-
-        ${Button} {
-            width: 100%;
+            margin-top: 0;
         }
     }
 `
@@ -102,12 +101,16 @@ export const Information = styled.div`
     line-height: 22px;
     width: 656px;
     height: 176px;
-    
+
     @media (max-width: ${breakpoints.desktop}) {
         justify-content: center;
         max-width: 100%;
         width: 100%;
         gap: 8px;
+    }
+    @media (max-width: ${breakpoints.tablet}) {
+        max-height: 360px;
+        overflow-y: scroll;
     }
 `
 

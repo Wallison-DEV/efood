@@ -1,72 +1,141 @@
-import { useDispatch, useSelector } from "react-redux"
-import { ReactElement, JSXElementConstructor, ReactNode } from "react"
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { Button } from "../Button/styles"
-import { formataPreco } from "../ProductList"
-import { CartContainer, CartItem, Overlay, Sidebar, ButtonDiv } from "./styles"
-import { RootReducer } from "../../store"
-import { close, remove, add, decrement } from "../../store/reducers/cart"
-import { CardapioItem } from "../Product"
+import Button from '../Button/index'
+
+import closeImg from '../../assets/icons/close.png'
+
+import * as S from './styles'
+
+import { formataPreco, getTotalPrice } from '../../Utils/index'
+
+import { RootReducer } from '../../store'
+import {
+    remove,
+    add,
+    decrement,
+    changeSidebar,
+    SidebarType,
+    close,
+} from '../../store/reducers/cart'
 
 const Cart = () => {
-    const { items, isOpen } = useSelector((state: RootReducer) => state.cart)
-
+    const { items } = useSelector((state: RootReducer) => state.cart)
     const dispatch = useDispatch()
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
-    const closeCart = () => {
-        dispatch(close())
+    const handleIncrement = (id: number) => {
+        const item: CardapioItem = {
+            id: id,
+            foto: '',
+            preco: 0,
+            nome: '',
+            descricao: '',
+            porcao: '',
+        }
+        dispatch(add(item))
+    }
+
+    const handleDecrement = (id: number) => {
+        dispatch(decrement(id))
     }
 
     const removeCartItem = (id: number) => {
         dispatch(remove(id))
     }
 
-    const handleIncrement = (id: number) => {
-        const item: CardapioItem = { id: id, foto: '', preco: 0, nome: '', descricao: '', porcao: '' };
-        dispatch(add(item));
-    };
-
-    const handleDecrement = (id: number) => {
-        dispatch(decrement(id)); 
-    };
-    
-    const getTotalPrice = () => {
-        return items.reduce((acumulador: any, valorAtual: { item: { preco: number }; quantity: number }) => {
-            return (acumulador += valorAtual.item.preco * valorAtual.quantity);
-        }, 0)
+    const closeCart = () => {
+        dispatch(changeSidebar(SidebarType.CART))
+        dispatch(close())
     }
-    
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth)
+        }
+
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
+
     return (
-        <CartContainer className={isOpen ? 'is-open' : ''}>
-            <Overlay onClick={closeCart}/>
-            <Sidebar>
-                <ul>
-                    {items.map((item: { item: { id: number; foto: string | undefined; nome: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined; preco: number | undefined }; quantity: number }) => (
-                        <CartItem key={item.item.id}>
-                            <img src={item.item.foto}  />
-                            <div>
-                                <h3>{item.item.nome}</h3>
-                                <span>{formataPreco(item.item.preco)}</span>
-                            </div>
-                            <ButtonDiv>
-                                <button onClick={()=> handleDecrement(item.item.id)} type="button">-</button>
-                                <span>{item.quantity}x</span>
-                                <button onClick={()=> handleIncrement(item.item.id)} type="button">+</button>
-                                <button
-                                    className="lixeira"
-                                    onClick={() => removeCartItem(item.item.id)}
-                                    type="button"
-                                />
-                            </ButtonDiv>
-                        </CartItem>
-                    ))}
-                </ul>
-                <div>
-                    <p>Valor total</p><span>{formataPreco(getTotalPrice())}</span>
+        <S.CartDiv>
+            <S.CloseIcon
+                className={
+                    windowWidth !== undefined && windowWidth > 400
+                        ? 'display-none'
+                        : ''
+                }
+                src={closeImg}
+                alt="Fechar"
+                onClick={closeCart}
+            />
+            {items.length > 0 ? (
+                <>
+                    <ul>
+                        {items.map((item) => (
+                            <S.CartItem key={item.item.id}>
+                                <img src={item.item.foto} />
+                                <div>
+                                    <h3>{item.item.nome}</h3>
+                                    <span>{formataPreco(item.item.preco)}</span>
+                                </div>
+                                <S.ButtonDiv>
+                                    <button
+                                        onClick={() =>
+                                            handleDecrement(item.item.id)
+                                        }
+                                        type="button"
+                                    >
+                                        -
+                                    </button>
+                                    <span>{item.quantity}x</span>
+                                    <button
+                                        onClick={() =>
+                                            handleIncrement(item.item.id)
+                                        }
+                                        type="button"
+                                    >
+                                        +
+                                    </button>
+                                    <button
+                                        className="lixeira"
+                                        onClick={() =>
+                                            removeCartItem(item.item.id)
+                                        }
+                                        type="button"
+                                    />
+                                </S.ButtonDiv>
+                            </S.CartItem>
+                        ))}
+                    </ul>
+                    <div>
+                        <p>Valor total</p>
+                        <span>{formataPreco(getTotalPrice(items))}</span>
+                    </div>
+                    <Button
+                        title="Prosseguir para a entrega"
+                        onClick={() =>
+                            dispatch(changeSidebar(SidebarType.CHECKOUT))
+                        }
+                        type="button"
+                    >
+                        Continuar com a entrega
+                    </Button>
+                </>
+            ) : (
+                <div className="empty-text">
+                    <p> O carrinho está vazio</p>
+                    <p>
+                        Adicione pelo menos um produto para continuar com a
+                        compra
+                    </p>
                 </div>
-                <Button type="btnProduct">Continuar com a entrega</Button>
-            </Sidebar>
-        </CartContainer>
+            )}
+        </S.CartDiv>
     )
 }
 

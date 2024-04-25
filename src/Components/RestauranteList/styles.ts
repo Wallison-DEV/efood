@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
-import { Cores, breakpoints } from '../../styles'
+import { Colors, breakpoints } from '../../styles'
 import { Card } from '../Restaurante/styles'
 
 export const Container = styled.section`
     padding: 26px 0 80px;
     ${Card} {
         width: 472px;
-        background-color: ${Cores.branco};
+        background-color: ${Colors.white};
     }
 `
 export const List = styled.ul`

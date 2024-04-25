@@ -1,17 +1,23 @@
 import { useParams } from 'react-router-dom'
-import ProductList from '../../Components/ProductList/index'
+
 import { RestauranteImagem } from './styles'
+
+import ProductList from '../../Components/ProductList/index'
 import Header from '../../Components/Header'
+import Loader from '../../Components/Loader'
+
 import { useGetProductListQuery } from '../../services/api'
-import { ProductProps } from '../../Components/Product'
+
+type ProductParams = {
+    id: number
+}
 
 const Perfil = () => {
-    const { id: number } = useParams()
-    const productId = number ? parseInt(number) : 0;
-    const { data: produto } = useGetProductListQuery(productId);
+    const { id } = useParams() as unknown as ProductParams
+    const { data: produto, isLoading } = useGetProductListQuery(id)
 
-    if (!produto) {
-        return <h3>Carregando...</h3>
+    if (isLoading || !produto) {
+        return <Loader />
     }
     return (
         <>

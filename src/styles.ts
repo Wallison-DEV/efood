@@ -1,15 +1,15 @@
 import { createGlobalStyle } from 'styled-components'
 
-export const Cores = {
-    salmao: '#E66767',
-    bege: '#FFF8F2',
-    branco: '#FFFFFF',
-    rosa: '#FFEBD9',
+export const Colors = {
+    salmon: '#E66767',
+    beige: '#FFF8F2',
+    white: '#FFFFFF',
+    pink: '#FFEBD9',
 }
 
 export const breakpoints = {
-  desktop: '1024px',
-  tablet: '767px',
+    desktop: '1024px',
+    tablet: '767px',
 }
 
 export const EstiloGlobal = createGlobalStyle`
@@ -21,8 +21,8 @@ export const EstiloGlobal = createGlobalStyle`
     list-style: none;
   }
   body {
-    background-color: ${Cores.bege};
-    color: ${Cores.salmao};
+    background-color: ${Colors.beige};
+    color: ${Colors.salmon};
   }
   .container { 
     max-width: 1024px;
@@ -32,5 +32,14 @@ export const EstiloGlobal = createGlobalStyle`
     @media (max-width: ${breakpoints.desktop}) {
       max-width: 80%;
     }
+  }
+  .margin-top {
+    margin-top: 16px;
+  }
+  .display-none {
+    display: none;
+  }
+  form {
+    width: 100%;
   }
 `

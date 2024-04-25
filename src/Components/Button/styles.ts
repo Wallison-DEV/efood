@@ -1,16 +1,18 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import { Cores } from '../../styles'
+import { Colors, breakpoints } from '../../styles'
 
+import { ButtonProps } from '.'
 
-export type ButtonProps = {
-    type: 'btnModal' | 'btnProduct'
-}
+const filteredStyles = (props: ButtonProps) => css`
+    max-width: ${props.maxwidth || 'auto'};
+    margin-top: ${props.margintop || '16px'};
+`
 
 export const ButtonLink = styled(Link)`
-    color: ${Cores.bege};
-    background-color: ${Cores.salmao};
+    color: ${Colors.beige};
+    background-color: ${Colors.salmon};
     text-decoration: none;
     padding: 4px 6px;
     font-size: 14px;
@@ -19,19 +21,23 @@ export const ButtonLink = styled(Link)`
     width: 88px;
     text-align: center;
     margin-top: 16px;
-    cursor: pointer;
 `
 
-export const Button = styled.button<ButtonProps>`
+export const ButtonContainer = styled.button<ButtonProps>`
     display: block;
-    width: ${(props) => (props.type === 'btnModal' ? '218px' : '304px')};
+    width: 100%;
     height: 24px;
     font-weight: 700;
     font-size: 14px;
-    color: ${Cores.salmao};
-    background-color: ${Cores.rosa};
+    color: ${Colors.salmon};
+    background-color: ${Colors.pink};
     border: none;
     outline: none;
     padding: 4px 7px;
     cursor: pointer;
+
+    ${filteredStyles}
+    @media (max-width: ${breakpoints.tablet}) {
+        max-width: 100%;
+    }
 `

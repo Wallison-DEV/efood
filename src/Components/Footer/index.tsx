@@ -1,41 +1,40 @@
-import { Container, FooterSection, Link, Links } from './styles'
+import * as S from './styles'
 
 import logo from '../../assets/images/logo.png'
-
 import facebook from '../../assets/icons/facebook.png'
 import twitter from '../../assets/icons/twitter.png'
 import instagram from '../../assets/icons/instagram.png'
 
 const Footer = () => (
-    <Container>
+    <S.Container>
         <div className="container">
-            <FooterSection>
+            <S.FooterSection>
                 <img src={logo} alt="E-FOOD logo" />
-                <Links>
+                <S.Links>
                     <li>
-                        <Link>
+                        <S.Link href="https://facebook.com">
                             <img src={facebook} alt="Visite nosso Facebook" />
-                        </Link>
+                        </S.Link>
                     </li>
                     <li>
-                        <Link>
+                        <S.Link href="https://x.com">
                             <img src={twitter} alt="Visite nosso Twitter" />
-                        </Link>
+                        </S.Link>
                     </li>
                     <li>
-                        <Link>
+                        <S.Link href="https://instagram.com">
                             <img src={instagram} alt="Visite nosso Instagram" />
-                        </Link>
+                        </S.Link>
                     </li>
-                </Links>
-            </FooterSection>
+                </S.Links>
+            </S.FooterSection>
             <p>
                 A efood é uma plataforma para divulgação de estabelecimentos, a
                 responsabilidade pela entrega, qualidade dos produtos é toda do
                 estabelecimento contratado.
             </p>
         </div>
-    </Container>
+    </S.Container>
 )
 
 export default Footer

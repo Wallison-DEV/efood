@@ -1,67 +1,19 @@
-import styled from "styled-components";
-import { Cores } from "../../styles";
+import styled from 'styled-components'
+import { Colors } from '../../styles'
 
 import excluirIcon from '../../assets/icons/lixeira.png'
-import { Button } from "../Button/styles";
-
-export const Overlay = styled.div`
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0.7;
-`
-
-export const CartContainer = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-    justify-content: flex-end;
-    z-index: 1;
-
-    &.is-open{
-        display: flex;
-    }
-`
-
-export const Sidebar = styled.aside`
-    max-width: 360px;
-    width: 100%;
-    padding: 32px 8px 0;
-    background-color: ${Cores.salmao};
-    overflow-y: scroll;
-    z-index: 1;
-
-    &>div{
-        display: flex;
-        justify-content: space-between;
-        font-size: 14px;
-        font-weight: 700;
-        color: ${Cores.rosa};
-    }
-
-    ${Button} {
-        width: 100%;
-        margin-top: 16px;
-    }
-`
 
 export const CartItem = styled.div`
-    background-color: ${Cores.rosa};
+    background-color: ${Colors.pink};
     height: 100px;
     display: flex;
     position: relative;
     padding: 8px;
-    color: ${Cores.salmao};
+    color: ${Colors.salmon};
     margin-bottom: 16px;
 
     &:last-child {
-        margin-bottom: 40px; 
+        margin-bottom: 40px;
     }
 
     img {
@@ -81,12 +33,12 @@ export const CartItem = styled.div`
         font-size: 14px;
         font-weght: 400;
     }
-    `
+`
 export const ButtonDiv = styled.div`
     position: absolute;
     bottom: 8px;
     right: 8px;
-    display: flex; 
+    display: flex;
     gap: 4px;
     align-items: center;
     text-align: center;
@@ -95,7 +47,7 @@ export const ButtonDiv = styled.div`
         align-items: center;
         justify-content: center;
         width: 16px;
-        height: 16px; 
+        height: 16px;
         background-color: transparent;
         border: none;
         cursor: pointer;
@@ -104,5 +56,20 @@ export const ButtonDiv = styled.div`
     .lixeira {
         background-image: url(${excluirIcon});
     }
-    
+`
+export const CartDiv = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    @media (max-width: 400px) {
+        padding-top: 32px;
+    }
+`
+export const CloseIcon = styled.img`
+    position: absolute;
+    max-width: 16px;
+    max-height: 16px;
+    top: 0;
+    right: 8px;
+    cursor: pointer;
 `

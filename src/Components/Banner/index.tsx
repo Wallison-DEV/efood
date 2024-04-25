@@ -1,23 +1,24 @@
-import { Imagem, Titulo } from './styles'
+import * as S from './styles'
+
 import BannerImg from '../../assets/images/fundo.png'
 import LogoImg from '../../assets/images/logo.png'
 
 export const Banner = () => {
     return (
-        <Imagem style={{ backgroundImage: `url(${BannerImg})` }}>
+        <S.Imagem style={{ backgroundImage: `url(${BannerImg})` }}>
             <div className="container">
                 <div>
                     <img src={LogoImg} alt="E-FOOD logo" />
                 </div>
                 <div>
-                    <Titulo>
+                    <S.Titulo>
                         Viva experiências gastronômicas
                         <br />
                         no conforto da sua casa
-                    </Titulo>
+                    </S.Titulo>
                 </div>
             </div>
-        </Imagem>
+        </S.Imagem>
     )
 }
 
