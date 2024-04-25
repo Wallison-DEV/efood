@@ -1,12 +1,12 @@
 import { Provider } from 'react-redux'
-
 import { BrowserRouter } from 'react-router-dom'
 
 import { EstiloGlobal } from './styles'
-import Rotas from './routes'
 import Footer from './Components/Footer'
+
+import Rotas from './routes'
 import { store } from './store'
-import Cart from './Components/Cart'
+import Sidebar from './Components/Sidebar'
 
 function App() {
     return (
@@ -15,7 +15,7 @@ function App() {
                 <EstiloGlobal />
                 <Rotas />
                 <Footer />
-                <Cart/>
+                <Sidebar />
             </BrowserRouter>
         </Provider>
     )

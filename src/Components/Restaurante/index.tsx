@@ -1,9 +1,8 @@
-import Tag from '../Tag';
-import { Card, Descricao, Infos, Ratting } from './styles';
+import Tag from '../Tag'
+import * as S from './styles'
 
-import starImg from '../../assets/icons/estrela.png';
-import Button from '../Button';
-import { RestauranteProps } from '../../Pages/Home';
+import starImg from '../../assets/icons/estrela.png'
+import Button from '../Button'
 
 const Restaurante = ({
     titulo,
@@ -16,38 +15,33 @@ const Restaurante = ({
     const truncatedDescription =
         descricao && descricao.length > 248
             ? descricao.substring(0, 248) + '...'
-            : descricao || '';
+            : descricao || ''
 
     return (
-        <Card>
+        <S.Card>
             <img src={capa} alt={titulo} />
             {Array.isArray(tipo) && tipo.length > 0 && (
-                <Infos>
+                <S.Infos>
                     {tipo.map((info, index) => (
                         <Tag key={index}>{info}</Tag>
                     ))}
-                </Infos>
+                </S.Infos>
             )}
             <section>
                 <div>
                     <h3>{titulo}</h3>
-                    <Ratting>
+                    <S.Ratting>
                         {avaliacao && avaliacao.toString()}{' '}
-                        <img
-                            src={starImg}
-                            alt="Estrela de classificação"
-                        />
-                    </Ratting>
+                        <img src={starImg} alt="Estrela de classificação" />
+                    </S.Ratting>
                 </div>
-                <Descricao>{truncatedDescription}</Descricao>
-                <Button
-                    title="Saiba mais"
-                    children="Saiba mais"
-                    to={`/perfil/${id}`}
-                />
+                <S.Descricao>{truncatedDescription}</S.Descricao>
+                <Button title="Saiba mais" type="link" to={`/perfil/${id}`}>
+                    Saiba mais
+                </Button>
             </section>
-        </Card>
-    );
-};
+        </S.Card>
+    )
+}
 
-export default Restaurante;
+export default Restaurante

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Cores } from '../../styles'
+import { Colors } from '../../styles'
 
 export const CardProduct = styled.div`
     position: relative;
@@ -10,8 +10,8 @@ export const CardProduct = styled.div`
     width: 320px;
     justify-content: space-between;
 
-    color: ${Cores.rosa};
-    background-color: ${Cores.salmao};
+    color: ${Colors.pink};
+    background-color: ${Colors.salmon};
 
     h3 {
         font-size: 16px;
@@ -29,6 +29,7 @@ export const CardProduct = styled.div`
         position: absolute;
         bottom: 8px;
         left: 8px;
+        max-width: 304px;
     }
 `
 export const Descricao = styled.p`

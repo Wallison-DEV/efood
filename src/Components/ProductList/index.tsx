@@ -1,43 +1,18 @@
+import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import Product, { CardapioItem, ProductProps } from '../Product/index'
-import {
-    Container,
-    List,
-    Modal,
-    ModalContent,
-    Information,
-    CloseIcon,
-} from './styles'
-import { useState } from 'react'
+import Product from '../Product/index'
+import Button from '../Button/index'
+
 import closeImg from '../../assets/icons/close.png'
-import { Button } from '../Button/styles'
+
+import * as S from './styles'
 
 import { add, open } from '../../store/reducers/cart'
-
-export type ProductListProps = {
-    produtos: ProductProps[]
-}
-
-export const formataPreco = (preco = 0) => {
-    return new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-    }).format(preco)
-}
+import { formataPreco } from '../../Utils'
 
 const ProductList = ({ produtos }: ProductListProps) => {
     const dispatch = useDispatch()
-
-    const openCart = () => {
-        dispatch(open())
-    }
-
-    const addToCart = (item : CardapioItem) => {
-        dispatch(add(item))
-    }
-    
-
     const [modal, setModal] = useState({
         estaVisivel: false,
         url: '',
@@ -48,6 +23,14 @@ const ProductList = ({ produtos }: ProductListProps) => {
         selectedItem: {} as CardapioItem,
     })
 
+    const openCart = () => {
+        dispatch(open())
+    }
+
+    const addToCart = (item: CardapioItem) => {
+        dispatch(add(item))
+    }
+
     const openModal = (item: CardapioItem) => {
         setModal({
             estaVisivel: true,
@@ -56,7 +39,7 @@ const ProductList = ({ produtos }: ProductListProps) => {
             descricao: item.descricao,
             preco: item.preco,
             porcao: item.porcao,
-            selectedItem: item, 
+            selectedItem: item,
         })
     }
 
@@ -72,63 +55,64 @@ const ProductList = ({ produtos }: ProductListProps) => {
         })
     }
 
-
     return (
-        <Container>
+        <S.Container>
             <div className="container">
                 {produtos && produtos.length > 0 ? (
-                    <List>
+                    <S.List>
                         {produtos.map((produto) =>
                             produto.cardapio.map((item) => (
                                 <div
                                     key={item.id}
                                     onClick={() => openModal(item)}
                                 >
-                                    <Product
-                                        key={item.id}
-                                        cardapio={[item]}
-                                    />
+                                    <Product key={item.id} cardapio={[item]} />
                                 </div>
                             ))
                         )}
-                    </List>
+                    </S.List>
                 ) : (
                     <p>No products available.</p>
                 )}
             </div>
             {modal.estaVisivel && (
-                <Modal className={modal.estaVisivel ? 'visivel' : ''}>
-                    <ModalContent className="container">
+                <S.Modal className={modal.estaVisivel ? 'visivel' : ''}>
+                    <S.ModalContent className="container">
                         <img
                             className="productImg"
                             src={modal.url}
                             alt={modal.title}
                         />
                         <div>
-                            <CloseIcon
+                            <S.CloseIcon
                                 src={closeImg}
                                 alt="Fechar"
                                 onClick={closeModal}
                             />
                             <h4>{modal.title}</h4>
-                            <Information>
+                            <S.Information>
                                 <p>{modal.descricao}</p>
                                 <p>Serve: {modal.porcao}</p>
-                            </Information>
+                            </S.Information>
                             <Button
-                                type="btnModal"
-                                style={{ marginTop: '16px' }}
-                                onClick={() => {addToCart(modal.selectedItem); openCart()}}
+                                type="button"
+                                title="Adicionar item ao carrinho"
+                                onClick={() => {
+                                    addToCart(modal.selectedItem)
+                                    openCart()
+                                }}
+                                maxwidth="218px"
+                                className="margin-top"
                             >
-                                Adicionar ao carrinho -{' '}
-                                {formataPreco(modal.preco)}
+                                {'Adicionar ao carrinho - ' +
+                                    formataPreco(modal.preco)}
                             </Button>
                         </div>
-                    </ModalContent>
+                    </S.ModalContent>
                     <div onClick={closeModal} className="overlay"></div>
-                </Modal>
+                </S.Modal>
             )}
-        </Container>
+        </S.Container>
     )
 }
 

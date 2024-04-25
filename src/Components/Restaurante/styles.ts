@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { TagContainer } from '../Tag/styles'
-import { Cores, breakpoints } from '../../styles'
+import { Colors, breakpoints } from '../../styles'
 
 export const Card = styled.div`
     position: relative;
@@ -36,9 +36,9 @@ export const Card = styled.div`
             height: 100%;
         }
 
-        border-bottom: 1px solid ${Cores.salmao};
-        border-left: 1px solid ${Cores.salmao};
-        border-right: 1px solid ${Cores.salmao};
+        border-bottom: 1px solid ${Colors.salmon};
+        border-left: 1px solid ${Colors.salmon};
+        border-right: 1px solid ${Colors.salmon};
 
         h3 {
             font-size: 18px;

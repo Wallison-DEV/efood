@@ -1,33 +1,15 @@
 import Banner from '../../Components/Banner'
+import Loader from '../../Components/Loader'
 import RestauranteList from '../../Components/RestauranteList/'
-import {useGetRestaurantListQuery} from '../../services/api'
-
-export type RestauranteProps = {
-    id: number;
-    titulo: string;
-    destacado: boolean;
-    tipo: string[];
-    avaliacao: number;
-    descricao: string;
-    capa: string;
-    cardapio: {
-        foto: string;
-        preco: number;
-        id: number;
-        nome: string;
-        description: string;
-        porcao: string;
-    }[];
-};
-
+import { useGetRestaurantListQuery } from '../../services/api'
 
 export const Home = () => {
-    const { data: restaurantes } = useGetRestaurantListQuery();
+    const { data: restaurantes, isLoading } = useGetRestaurantListQuery()
 
-    if (!restaurantes || restaurantes.length === 0) {
-        return <h3>Carregando...</h3>;
+    if (!restaurantes || restaurantes.length === 0 || isLoading) {
+        return <Loader />
     }
-    
+
     return (
         <>
             <Banner />
@@ -35,4 +17,3 @@ export const Home = () => {
         </>
     )
 }
-
